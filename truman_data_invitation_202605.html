@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truman Data — Energy Coop Demo Days Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f4f4f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+  }
+  .inv-wrap {
+    max-width: 680px;
+    width: 100%;
+  }
+  .inv-header {
+    background: #0B2A1F;
+    color: #E1F5EE;
+    padding: 2.5rem 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+  }
+  .inv-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: #1D9E75;
+    opacity: 0.13;
+  }
+  .inv-header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 40%;
+    width: 170px; height: 170px;
+    border-radius: 50%;
+    background: #0F6E56;
+    opacity: 0.18;
+  }
+  .inv-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5DCAA5;
+    margin: 0 0 0.75rem;
+  }
+  .inv-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    color: #E1F5EE;
+    position: relative; z-index: 1;
+  }
+  .inv-title em {
+    font-style: italic;
+    color: #9FE1CB;
+  }
+  .inv-subtitle {
+    font-size: 13px;
+    color: #9FE1CB;
+    margin: 0;
+    font-weight: 300;
+    position: relative; z-index: 1;
+  }
+  .inv-body {
+    background: #ffffff;
+    border: 1px solid #e0e0d8;
+    border-top: none;
+    padding: 2rem 2.5rem;
+    border-radius: 0 0 12px 12px;
+  }
+  .inv-intro {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    margin: 0 0 1.75rem;
+  }
+  .inv-section-label {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1D9E75;
+    margin: 0 0 0.5rem;
+  }
+  .inv-pilot-block {
+    border-left: 2px solid #1D9E75;
+    padding: 0.75rem 1rem;
+    margin: 0 0 1.75rem;
+    background: #E1F5EE;
+    border-radius: 0 8px 8px 0;
+  }
+  .inv-pilot-block p {
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0;
+    color: #085041;
+  }
+  /* Sessions note */
+  .inv-sessions-note {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    background: #fffbf0;
+    border: 1px solid #e8dfc0;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 0 0 1rem;
+  }
+  /* Sessions grid */
+  .inv-sessions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 0 0 1.75rem;
+  }
+  .inv-session-card {
+    border: 1px solid #d0d0c8;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .inv-session-head {
+    background: #0B2A1F;
+    padding: 0.875rem 1.125rem;
+  }
+  .inv-session-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: #9FE1CB;
+    line-height: 1;
+    margin: 0 0 2px;
+  }
+  .inv-session-date {
+    font-size: 12px;
+    color: #5DCAA5;
+    font-weight: 400;
+  }
+  .inv-session-body {
+    background: #f8f8f5;
+    padding: 0.875rem 1.125rem;
+  }
+  .inv-session-time {
+    font-size: 15px;
+    font-weight: 500;
+    color: #0B2A1F;
+    margin: 0 0 4px;
+  }
+  .inv-session-tz {
+    font-size: 12px;
+    color: #888;
+    margin: 0 0 10px;
+  }
+  .inv-meet-info {
+    background: #fff;
+    border: 1px solid #e0e0d8;
+    border-radius: 8px;
+    padding: 0.625rem 0.75rem;
+    margin: 0 0 10px;
+  }
+  .inv-meet-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: #555;
+    margin: 0 0 4px;
+    line-height: 1.4;
+  }
+  .inv-meet-row:last-child { margin: 0; }
+  .inv-meet-row .mlabel {
+    color: #888;
+    flex-shrink: 0;
+    min-width: 40px;
+  }
+  .inv-meet-link {
+    color: #0F6E56;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 10px;
+    word-break: break-all;
+  }
+  .inv-phone-link {
+    color: #888;
+    text-decoration: none;
+    font-size: 10px;
+    word-break: break-all;
+  }
+  .inv-meet-link:hover { text-decoration: underline; }
+  .inv-cta-btn {
+    display: block;
+    text-align: center;
+    background: #0B2A1F;
+    color: #9FE1CB;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .inv-cta-btn:hover { background: #0F3D2C; }
+  /* Duration note */
+  .inv-duration {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #555;
+    margin: 0 0 1.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0d8;
+    line-height: 1.5;
+    background: #fafaf8;
+  }
+  .inv-duration .dicon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  /* What you'll see */
+  .inv-what { margin: 0 0 1.75rem; }
+  .inv-what p {
+    font-size: 14px;
+    line-height: 1.78;
+    color: #555;
+    margin: 0 0 0.75rem;
+  }
+  /* Asset tags */
+  .inv-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 1.75rem;
+  }
+  .inv-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #E1F5EE;
+    color: #085041;
+    font-weight: 400;
+  }
+  /* Outcomes */
+  .inv-outcomes { margin: 0 0 1.75rem; }
+  .inv-outcome-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 0 0 0.65rem;
+  }
+  .inv-outcome-item .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #1D9E75;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .inv-outcome-item span {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.55;
+  }
+  /* Confirmed attendees */
+  .inv-attendees { margin: 0 0 1.75rem; }
+  .inv-attendee-list {
+    border: 1px solid #e0e0d8;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .inv-attendee-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e0e0d8;
+  }
+  .inv-attendee-item:last-child { border-bottom: none; }
+  .inv-attendee-badge {
+    width: 90px; height: 34px;
+    border-radius: 2px;
+    background: #0B2A1F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #9FE1CB;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+  .inv-attendee-badge.placeholder {
+    background: #f0f0eb;
+    color: #aaa;
+  }
+  .inv-attendee-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 2px;
+  }
+  .inv-attendee-desc {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.4;
+    margin: 0;
+  }
+  /* Footer */
+  .inv-footer {
+    border-top: 1px solid #e0e0d8;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .inv-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0B2A1F;
+  }
+  .inv-footline {
+    font-size: 12px;
+    color: #888;
+  }
+  @media (max-width: 540px) {
+    .inv-sessions { grid-template-columns: 1fr; }
+    .inv-header, .inv-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="inv-wrap">
+ 
+  <div class="inv-header">
+    <p class="inv-eyebrow">You are invited</p>
+    <h1 class="inv-title">The <em>Energy Coop</em> Solution<br>— Demo Days</h1>
+    <p class="inv-subtitle">Virtual power plant &amp; critical electricity infrastructure · Truman Data Oy · via Google Meet</p>
+  </div>
+ 
+  <div class="inv-body">
+ 
+    <!-- Intro -->
+    <p class="inv-intro">
+      Truman Data is building a cloud platform that delivers an AI-driven consumption management system incorporating end-user-tailored flexibility prediction models that enable end customers to trade demand response, i.e., flexibility into energy markets on their own terms.</br>
+      The solution delivers significant <strong>new earnings through energy cost optimization</strong> and <strong>trades in flexibility</strong> sourced from the built environment; together, these <strong>reduce CO₂ emissions for large built-environment owners</strong>.</br>
+      The platform is purpose-built to support <strong>critical electricity infrastructure</strong>, ensuring the highest standards of security, data sovereignty, and operational resilience, and will be hosted exclusively in EU-based data centers, independent of major US hyperscalers. The platform guarantees end customers&rsquo; full data ownership.
+    </p>
+ 
+    <!-- Pilot -->
+    <p class="inv-section-label">Live pilot</p>
+    <div class="inv-pilot-block">
+      <p>The Energy Coop — a virtual power plant and automated flexibility trading system — has been piloted on the City of Riihimäki's owned property portfolio electricity. Real data, real optimization, in production.</p>
+    </div>
+ 
+    <!-- Sessions -->
+    <p class="inv-section-label">Pick one session — both cover identical content</p>
+    <div class="inv-sessions-note">
+      The two sessions below are <strong>independent of each other</strong> and cover exactly the same demonstration. Please choose whichever time suits you best 👇 There is no need to attend both.
+    </div>
+    <div class="inv-sessions">
+ 
+      <!-- Session 1: May 27 -->
+      <div class="inv-session-card">
+        <div class="inv-session-head">
+          <div class="inv-session-num">27</div>
+          <div class="inv-session-date">May · Option A</div>
+        </div>
+        <div class="inv-session-body">
+          <p class="inv-session-time">3:00 pm (EET)</p>
+          <p class="inv-session-tz">Finland time · Europe/Helsinki</p>
+          <div class="inv-meet-info">
+            <div class="inv-meet-row">
+              <span class="mlabel">Video</span>
+              <a class="inv-meet-link" href="https://meet.google.com/anv-upgk-tna" target="_blank">meet.google.com/anv-upgk-tna</a>
+            </div>
+            <div class="inv-meet-row">
+              <span class="mlabel">Phone</span>
+              <span class="inv-phone-link">+358 9 85691592 &nbsp;·&nbsp; PIN: 875 122 625#</span>
+            </div>
+            <div class="inv-meet-row">
+              <span class="mlabel">More</span>
+              <a class="inv-meet-link" href="https://tel.meet/anv-upgk-tna?pin=9587887019511" target="_blank">tel.meet/anv-upgk-tna</a>
+            </div>
+          </div>
+          <a class="inv-cta-btn" href="https://meet.google.com/anv-upgk-tna" target="_blank">Join — May 27, 3:00 pm →</a>
+        </div>
+      </div>
+ 
+      <!-- Session 2: May 28 -->
+      <div class="inv-session-card">
+        <div class="inv-session-head">
+          <div class="inv-session-num">28</div>
+          <div class="inv-session-date">May · Option B</div>
+        </div>
+        <div class="inv-session-body">
+          <p class="inv-session-time">9:00 am (EET)</p>
+          <p class="inv-session-tz">Finland time · Europe/Helsinki</p>
+          <div class="inv-meet-info">
+            <div class="inv-meet-row">
+              <span class="mlabel">Video</span>
+              <a class="inv-meet-link" href="https://meet.google.com/ipi-qcee-jzr" target="_blank">meet.google.com/ipi-qcee-jzr</a>
+            </div>
+            <div class="inv-meet-row">
+              <span class="mlabel">Phone</span>
+              <span class="inv-phone-link">+358 9 85691671 &nbsp;·&nbsp; PIN: 665 784 441#</span>
+            </div>
+            <div class="inv-meet-row">
+              <span class="mlabel">More</span>
+              <a class="inv-meet-link" href="https://tel.meet/ipi-qcee-jzr?pin=4490869476341" target="_blank">tel.meet/ipi-qcee-jzr</a>
+            </div>
+          </div>
+          <a class="inv-cta-btn" href="https://meet.google.com/ipi-qcee-jzr" target="_blank">Join — May 28, 9:00 am →</a>
+        </div>
+      </div>
+ 
+    </div><!-- end sessions -->
+ 
+    <!-- Duration -->
+    <div class="inv-duration">
+      <span class="dicon">🕐</span>
+      <span>Up to <strong>1 hour</strong> per session — with an optional additional <strong>30 minutes</strong> reserved for those who want a comprehensive deep-dive and Q&amp;A.</span>
+    </div>
+ 
+    <!-- What you'll see -->
+    <p class="inv-section-label">What you will see</p>
+    <div class="inv-what">
+      <p>We show how the sausage is made. The demonstration uses real data to walk through how the cloud solution trades and performs optimization in real time — illustrating how the Energy Coop functions as both a virtual power plant and a critical electricity infrastructure tool for large built environments.</p>
+      <p>After the demo, you will understand how the Energy Coop platform connects all energy assets across the built environment and turns them into a unified, fully automated flexibility trading system that generates value continuously.</p>
+    </div>
+ 
+    <div class="inv-tags">
+      <span class="inv-tag">EVs</span>
+      <span class="inv-tag">Heating &amp; ventilation</span>
+      <span class="inv-tag">BESS</span>
+      <span class="inv-tag">Lighting</span>
+      <span class="inv-tag">Cooling</span>
+      <span class="inv-tag">All flexible consumption</span>
+    </div>
+ 
+    <!-- Outcomes -->
+    <p class="inv-section-label">What it creates</p>
+    <div class="inv-outcomes">
+      <div class="inv-outcome-item"><div class="dot"></div><span>Earnings through continuous portfolio-wide cost optimization</span></div>
+      <div class="inv-outcome-item"><div class="dot"></div><span>Entirely new revenue from aggregated flexibility sold automatically on Intraday and Day-Ahead markets via the automated flexibility trading system</span></div>
+      <div class="inv-outcome-item"><div class="dot"></div><span>Verified CO₂ emissions savings across the entire portfolio</span></div>
+      <div class="inv-outcome-item"><div class="dot"></div><span>Fully automated for the end customer — no manual intervention required</span></div>
+    </div>
+ 
+    <!-- Who it's for -->
+    <p class="inv-section-label">Who this is for</p>
+    <div class="inv-what">
+      <p>Cities, municipalities, shopping centers, large energy-consuming businesses, and major real estate holders such as investment funds and mutual pension insurance companies, etc., that can use a closed PaaS platform to maximize energy efficiency and unlock new income from their flexibility capacity.</p>
+    </div>
+ 
+    <!-- Confirmed attendees -->
+    <p class="inv-section-label">Confirmed attendees</p>
+    <div class="inv-attendees">
+      <div class="inv-attendee-list">
+ 
+        <div class="inv-attendee-item">
+          <div class="inv-attendee-badge">VTT</div>
+          <div>
+            <p class="inv-attendee-name">VTT Technical Research Centre of Finland</p>
+            <p class="inv-attendee-desc">VTT (Technical Research Centre of Finland) is one of the leading research and innovation organizations in Europe. VTT operates as a visionary R&amp;D partner, commercializing deep-tech innovations and solving major global challenges. VTT coordinates key European initiative, the EU superconducting quantum technology pilot.</p>
+          </div>
+        </div>
+ 
+        <div class="inv-attendee-item">
+          <div class="inv-attendee-badge">Fingrid</div>
+          <div>
+            <p class="inv-attendee-name">Fingrid Oyj</p>
+            <p class="inv-attendee-desc">Finland's sole national electricity transmission system operator (TSO), responsible for the technical functionality, system security, and balance of the Finnish power system.</p>
+          </div>
+        </div>
+ 
+        <div class="inv-attendee-item">
+          <div class="inv-attendee-badge">DLA Piper</div>
+          <div>
+            <p class="inv-attendee-name">DLA Piper Finland</p>
+            <p class="inv-attendee-desc">The Finnish office of DLA Piper, one of the world's largest global business law firms with offices in more than 40 countries, ranked #1 in Nordic M&amp;A. DLA Piper Finland Attorneys Ltd advises on corporate, energy, real estate, technology, and regulatory matters.</p>
+          </div>
+        </div>
+ 
+        <div class="inv-attendee-item">
+          <div class="inv-attendee-badge">BRPs</div>
+          <div>
+            <p class="inv-attendee-name">Two large Finnish energy companies</p>
+            <p class="inv-attendee-desc">Balance responsible parties (BRPs) active in the Finnish electricity market.</p>
+          </div>
+        </div>
+        <div class="inv-attendee-item">
+          <div class="inv-attendee-badge">AI platform</div>
+          <div>
+            <p class="inv-attendee-name">ConfidentialMind</p>
+            <p class="inv-attendee-desc">An AI platform for on-prem and private cloud.</p>
+          </div>
+        </div>
+ 
+ 
+ 
+      </div>
+    </div>
+ 
+    <!-- Footer -->
+    <div class="inv-footer">
+      <span class="inv-logo">Truman Data Oy</span>
+      <span class="inv-footline">EU-hosted · AI-driven · Customer data sovereignty guaranteed</span>
+    </div>
+ 
+  </div>
+</div>
+</body>
+</html>
